@@ -12,6 +12,10 @@ class Game:
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 sys.exit()
+            if e.type == pygame.KEYDOWN:
+                if e.key == pygame.K_SPACE:
+                    print("HA")
+                    self.test_piece.flip()
     
     def main_loop(self):
         while True:
