@@ -25,6 +25,5 @@ class Long(Piece):
     def flip(self):
         diff = -20
         for i in self.form:
-            i.x = 
             i.x += diff
             diff += 10 
