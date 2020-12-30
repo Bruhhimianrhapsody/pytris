@@ -6,7 +6,6 @@ class Piece():
         self.BLOCK_SIZE = 20         
         self.x = (screen_size // 2) - (self.BLOCK_SIZE // 2)
         self.y = 0
-        self.state = 0
 
 class Long(Piece):
 
@@ -14,7 +13,7 @@ class Long(Piece):
         super().__init__(screen_size)
         self.blocks = [pygame.Rect(self.x, y, self.BLOCK_SIZE, self.BLOCK_SIZE,) for y in range(0, 40, 10)]
         self.color = (64, 224, 208)
-        self.flip_state = True
+        self.can_flip = True
 
     def show(self, screen):
         for i in self.blocks:
@@ -25,15 +24,18 @@ class Long(Piece):
             i.y += self.BLOCK_SIZE  
 
     def flip(self):
-        if self.flip_state == True:
+        if self.can_flip == True:
             diff = -20
             for i in self.blocks:
                 i.x += diff
                 diff += self.BLOCK_SIZE
             for i in self.blocks:
                 i.y = self.blocks[-1].y
-                self.flip_state = False
+            self.can_flip = False
         else:
-            
-            self.flip_state = True
-        
+            diff = -20
+            for i in self.blocks:
+                i.x = self.blocks[-1].x
+                i.y += diff 
+                diff += self.BLOCK_SIZE
+            self.can_flip = True
